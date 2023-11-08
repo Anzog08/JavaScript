@@ -3,16 +3,17 @@ const ugsunMin = 84;
 const ugsunSec = 85;
 
 let niitSec = 0;
-niitSec = ugsunTsag * 3600 + ugsunMin * 60 + ugsunSec;
 
-console.log(niitSec, "niitdee");
+// niitSec = ugsunTsag * 3600 + ugsunMin * 60 + ugsunSec;
 
-// let niitMin = ugsunTsag * 60;
+// console.log(niitSec, "niitdee");
 
-// console.log(niitMin, "niitMin");
+let niitMin = ugsunTsag * 60;
 
-// let minTosec = ugsunMin + niitMin;
+console.log(niitMin, "niitMin");
 
-// console.log(minTosec, "minut+minut");
+let minTosec = ugsunMin + niitMin;
 
-// let niit = minTosec * 60 + ugsunSec;
+console.log(minTosec, "minut+minut");
+
+let niit = minTosec * 60 + ugsunSec;
