@@ -48,7 +48,7 @@
 // input.addEventListener("change", () => {});
 
 const htmlBody = document.getElementsByTagName("body")[0];
-const newH1Element = document.createComment(h1);
+const newH1Element = document.createComment("h1");
 htmlBody.appendChild(newH1Element);
 newH1Element.innerHTML = "Hello JS";
 console.log("Hello JS");
