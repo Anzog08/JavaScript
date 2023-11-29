@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./sutai.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.layout {
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+  height: fit-content;
+  border: solid crimson;
+}
+.card {
+  width: 300px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 10px;
+}
+.cardText {
+  font-size: 26px;
+  font-weight: bold;
+}
+.add {
+  font-size: 18px;
+}
+.count {
+  color: grey;
+  font-weight: bold;
+  font-size: 20px;
+}
