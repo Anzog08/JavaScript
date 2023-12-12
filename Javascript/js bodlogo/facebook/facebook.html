@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="facebook.css" />
+  </head>
+  <body>
+    <div id="container" class="container">
+      <h1>Sign Up</h1>
+        <form action="" id="names" class="names">
+          <input placeholder="FirstName" id="first" type="text" />
+          <input placeholder="LastName" id="last" type="text" />
+        </form>
+        
+        <div id="mobileEmail" class="mobile">
+            <input placeholder="Mobile number or email" id="mobile-email" type="text" />
+            <input placeholder="New password" id="password" type="password" />
+        </div>
+       
+     <form action="" id="Birthday" class="Birthday">
+        <label for="birthday"> Birthday</label>
+        <select name="month" id="month">
+           <option value="Jan">January</option>
+           <option value="Februaty">February</option>
+           <option value="March">March</option>
+           <option value="May">May</option>
+          </select>
+          <select name="days" id="days">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="28">28</option>
+            
+          </select>
+          <select name="year" id="year">
+            <option value="1980">1980</option>
+            <option value="1999">1999</option>
+            <option value="2000">2000</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+          </select>
+          
+     </form>
+        <div class="gender">
+        <input type="radio" name="sex" id="female"> Female
+        <input type="radio" name="sex" id="male"> Male
+        </div>
+        <button id="CreateAccount">Create Account</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="facebook.js"></script>
+</html>

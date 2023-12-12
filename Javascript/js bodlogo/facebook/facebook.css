@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  height: 650px;
+  border: 1px solid green;
+  gap: 20px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.names {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.first {
+  display: flex;
+  width: 190px;
+  height: 25px;
+  border: 1px solid grey;
+}
+.last {
+  display: flex;
+  width: 190px;
+  height: 25px;
+  border: 1px solid grey;
+}
+.mobileEmail {
+  display: flex;
+  width: 400px;
+  height: 25px;
+  flex-direction: column;
+  /* border: 1px solid grey; */
+}

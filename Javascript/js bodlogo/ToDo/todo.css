@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./sutai.jpeg");
+  background-image: url("./Sutai1.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -19,12 +19,15 @@
   display: flex;
   gap: 20px;
   width: fit-content;
-  height: fit-content;
-  border: solid crimson;
+  height: 600px;
+  margin-top: 30px;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .card {
   width: 300px;
-  height: 130px;
+  min-height: 130px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -36,11 +39,157 @@
   font-size: 26px;
   font-weight: bold;
 }
+.click {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  width: 265px;
+  height: 50px;
+  border-radius: 10px;
+  gap: 20px;
+}
 .add {
-  font-size: 18px;
+  display: flex;
+}
+.click:hover {
+  background-color: rgb(173, 175, 177);
 }
 .count {
   color: grey;
   font-weight: bold;
   font-size: 20px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px; /* Location of the box */
+  position: fixed;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: #fefefe;
+  z-index: 1;
+  border-radius: 10px;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  width: 330px;
+  height: 450px;
+  position: relative;
+  top: 10%;
+  left: 42.5%;
+  border-radius: 10px;
+  padding: 10px;
+  column-gap: 10px;
+}
+.title {
+  width: 310px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.description {
+  width: 310px;
+  height: 100px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.status {
+  width: 310px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.priority {
+  width: 310px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+#Add_Task {
+  width: 310px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: black;
+  color: azure;
+}
+
+.ToDo {
+  width: 100%;
+  height: fit-content;
+  min-height: 120px;
+  border: solid 1px #fff;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.todoTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toDoTitleLeft {
+  display: flex;
+  gap: 5px;
+}
+.titleText {
+  font-size: 18px;
+  font-weight: bold;
+}
+.checkIcon {
+  width: 21px;
+  height: 21px;
+  border: solid 1px grey;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toDoTitleRight {
+  width: 21px;
+  height: 21px;
+  border: solid 1px grey;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.desc {
+  display: flex;
+  justify-content: space-between;
+}
+.descText {
+  margin-left: 25px;
+}
+
+.prio {
+  width: fit-content;
+  min-width: 50px;
+  height: 25px;
+  border: solid 1px grey;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25px;
+}
+.clock {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80px;
+  /* padding-right: 100px; */
+  margin-bottom: 60px;
+  /* position: relative;
+  left: 30%; */
 }

@@ -5,38 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="todo.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <div class="container">
       <div class="layout">
-        <div class="card">
+        <div class="clock">
+          <span class="hour"></span>:<span class="minute"></span>
+        </div>
+        <div id="cardTodo" class="card">
           <div>
             <span class="cardText">To do</span>
             <span class="count">0</span>
           </div>
-          <div class="add">+ Add card</div>
+
+          <div id="todo-mid" class="result"></div>
+
+          <div class="click">
+            <div class="+">+</div>
+            <div class="add">Add card</div>
+          </div>
         </div>
-        <div class="card">
+
+        <div class="card" id="cardProg">
           <div>
             <span class="cardText">In progress</span>
             <span class="count">0</span>
           </div>
-          <div class="add">+ Add card</div>
+          <div id="progress-mid" class="result"></div>
+          <div class="click">
+            <div class="+">+</div>
+            <div class="add">Add card</div>
+          </div>
         </div>
-        <div class="card">
+
+        <div class="card" id="cardStuck">
           <div>
             <span class="cardText">Stuck</span>
             <span class="count">0</span>
           </div>
-          <div class="add">+ Add card</div>
+          <div id="stuck-mid" class="result"></div>
+          <div class="click">
+            <div class="+">+</div>
+            <div class="add">Add card</div>
+          </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="cardDone">
           <div>
-            <span class="cardText">one</span>
+            <span class="cardText">Done</span>
             <span class="count">0</span>
           </div>
-          <div class="add">+ Add card</div>
+          <div id="done-mid" class="result"></div>
+          <div class="click">
+            <div class="+">+</div>
+            <div class="add">Add card</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="MyModal" class="modal">
+        <div class="modal-content">
+          <h1>Add Task</h1>
+          <span>title</span>
+          <input id="title" type="text" /><br />
+          <span>description</span>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+          ></textarea
+          ><br />
+          <span>status</span>
+          <select name="status" id="status">
+            <option value="ToDo">To do</option>
+            <option value="InProgress">In progress</option>
+            <option value="Stuck">Stuck</option>
+            <option value="Done">Done</option></select
+          ><br />
+          <span>priority</span>
+          <select name="priority" id="priority">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option></select
+          ><br /><br />
+          <button id="Add_Task">Add Task</button>
         </div>
       </div>
     </div>
