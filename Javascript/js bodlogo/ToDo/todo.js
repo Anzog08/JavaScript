@@ -29,7 +29,9 @@ const add_taskButton = document.getElementById("Add_Task");
 const description = document.getElementById("description");
 
 let states = [];
-states = JSON.parse(localStorage.getItem("myToDo"));
+states = JSON.parse(localStorage.getItem("myToDo"))
+  ? JSON.parse(localStorage.getItem("myToDo"))
+  : [];
 
 const MyObject = {
   id: "",
@@ -57,13 +59,17 @@ const setData = () => {
   render();
 };
 
-add_taskButton.addEventListener("click", (event) => {
-  if (event.target != modal) {
-    modal.style.display = "none";
-  }
+let activeEdit = false;
 
-  setData();
-  restart();
+add_taskButton.addEventListener("click", (event) => {
+  if (activeEdit) {
+    editTastFunction();
+  } else {
+    modal.style.display = "block";
+    setData();
+    restart();
+    location.reload();
+  }
 });
 
 const restart = () => {
@@ -76,17 +82,15 @@ const restart = () => {
 const cardComponent = (props) => {
   const { title, description, status, priority, id } = props;
   return `
-           <div class="ToDo" draggable="true" id="${id}"> 
+           <div class="ToDo" draggable="true" id="${id}">
             <div class="todoTitle">
              <div class="toDoTitleLeft">
-               <div class="checkIcon">
-                 <span
-                   class="material-symbols-outlined"
-                   style="font-size: 20px"
-                 >
-                   check
-                 </span>
-               </div>
+             <div class="checkIcon">    
+               <div id=${id}  >${
+    status == "Done" ? `<div class="aa">&#10003</div>` : "&#10003"
+  }</div>
+             </div>
+                 
                <div class="titleText">${title}</div>
              </div>
              <div class="toDoTitleRight">
@@ -95,19 +99,22 @@ const cardComponent = (props) => {
                </span>
              </div>
            </div>
-
+ 
            <div class="desc">
              <div class="descText">${description}</div>
              <div class="descIcon">
                <i style="font-size: 20px" class="fa">&#xf044;</i>
              </div>
            </div>
-
-           <div> ${status}</div>
-
+ 
+          
+ 
            <div class="prio">${priority}</div>
-          </div>`;
+          </div>
+          `;
 };
+
+let edittedTaskID = "";
 
 const render = () => {
   const todoMid = document.getElementById("todo-mid");
@@ -121,9 +128,8 @@ const render = () => {
   stuckMid.innerHTML = "";
   doneMid.innerHTML = "";
 
-  jsonText.forEach((el) => {
+  jsonText?.forEach((el) => {
     const result = cardComponent(el);
-
     switch (el.status) {
       case "ToDo":
         todoMid.innerHTML += result;
@@ -137,20 +143,103 @@ const render = () => {
       case "Done":
         doneMid.innerHTML += result;
         break;
-      default:
-        break;
     }
   });
 
-  const draggable = document.querySelectorAll(".ToDo");
+  const editButton = document.querySelectorAll(".descIcon");
+  const addTask = document.getElementById("addTask");
 
-  draggable.forEach((el) => {
-    el.addEventListener("dragstart", (event) => {
-      event.dataTransfer.setData("dragg", event.target.id);
+  editButton.forEach((el) => {
+    el.addEventListener("click", () => {
+      const parentId = el.parentElement.parentElement.id;
+      edittedTaskID = parentId;
+
+      modal.style.display = "block";
+      addTask.innerHTML = "<b>Edit Task</b>";
+      add_taskButton.innerHTML = "Save";
+      activeEdit = true;
+      states.forEach((el) => {
+        if (el.id === parentId) {
+          title.value = el.title;
+          statuss.value = el.status;
+          priority.value = el.priority;
+          description.value = el.description;
+        }
+      });
     });
   });
 };
+console.log(edittedTaskID);
+function editTastFunction() {
+  const findBack = JSON.parse(localStorage.getItem("myToDo"));
+  const chessArr = findBack.map((el) => {
+    if (el.id === edittedTaskID) {
+      return {
+        ...el,
+        title: title.value,
+        status: statuss.value,
+        description: description.value,
+        priority: priority.value,
+      };
+    }
+    return el;
+  });
+
+  localStorage.setItem("myToDo", JSON.stringify(chessArr));
+  add_taskButton.innerHTML = "Add Task";
+  modal.style.display = "none";
+  activeEdit = false;
+  location.reload();
+}
+
 render();
+
+const dragable = document.querySelectorAll(".ToDo");
+
+dragable.forEach((el) => {
+  el.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("dragg", event.target.id);
+  });
+});
+
+const deleteButton = document.querySelectorAll(".toDoTitleRight");
+
+deleteButton.forEach((el) => {
+  el.addEventListener("click", () => {
+    const parent = el.parentNode;
+    const grandparent = parent.parentNode;
+    const grandparentID = grandparent.id;
+
+    const callBack = JSON.parse(localStorage.getItem("myToDo"));
+    const newArr = callBack.filter((el) => {
+      if (el.id === grandparentID) {
+        return false;
+      }
+      return true;
+    });
+
+    localStorage.setItem("myToDo", JSON.stringify(newArr));
+    render();
+    location.reload();
+  });
+});
+
+const checkButton = document.querySelectorAll(".checkIcon");
+
+checkButton.forEach((el) => {
+  el.addEventListener("click", () => {
+    let parentId = el.parentElement.parentElement.parentElement.id;
+    const findBack = JSON.parse(localStorage.getItem("myToDo"));
+    const checkArr = findBack.map((el) => {
+      if (el.id === parentId) {
+        return { ...el, status: "Done" };
+      }
+      return el;
+    });
+    localStorage.setItem("myToDo", JSON.stringify(checkArr));
+    location.reload();
+  });
+});
 
 const draggable = document.querySelectorAll(".result");
 const dropable = document.querySelectorAll(".card");
@@ -177,21 +266,29 @@ const cardDone = document.getElementById("cardDone");
 cardTodo.addEventListener("drop", (event) => {
   const draggedTodo = updateLocalStorage(event, "ToDo");
   todoMid.appendChild(draggedTodo);
+  findCount();
+  location.reload();
 });
 
 cardProg.addEventListener("drop", (event) => {
   const draggedTodo = updateLocalStorage(event, "InProgress");
   progresMid.appendChild(draggedTodo);
+  findCount();
+  location.reload();
 });
 
 cardStuck.addEventListener("drop", (event) => {
   const draggedTodo = updateLocalStorage(event, "Stuck");
   stuckMid.appendChild(draggedTodo);
+  findCount();
+  location.reload();
 });
 
 cardDone.addEventListener("drop", (event) => {
   const draggedTodo = updateLocalStorage(event, "Done");
   doneMid.appendChild(draggedTodo);
+  findCount();
+  location.reload();
 });
 
 function updateLocalStorage(event, status) {
@@ -206,17 +303,31 @@ function updateLocalStorage(event, status) {
 
   return draggedTodo;
 }
-const updateTime = () => {
-  const currentTime = new Date();
+const box = document.querySelectorAll(".card");
+console.log(box);
 
-  let currentHour = currentTime.getHours();
-  const currentMinute = currentTime.getMinutes();
-
-  if (currentHour > 12) {
-    currentHour -= 12;
-  }
-  hourEl.textContent = currentHour.toString();
-  minuteEl.textContent = currentMinute.toString().padStart(2, "0");
+const findCount = () => {
+  box.forEach((el) => {
+    const tasks = el.querySelectorAll(".ToDo");
+    console.log(tasks);
+    const taskCount = el.getElementsByClassName("count")[0];
+    console.log(taskCount);
+    taskCount.innerHTML = tasks.length;
+  });
 };
-setInterval(updateTime, 1000);
-updateTime();
+findCount();
+
+// const updateTime = () => {
+//   const currentTime = new Date();
+
+//   let currentHour = currentTime.getHours();
+//   const currentMinute = currentTime.getMinutes();
+
+//   if (currentHour > 12) {
+//     currentHour -= 12;
+//   }
+//   hourEl.textContent = currentHour.toString();
+//   minuteEl.textContent = currentMinute.toString().padStart(2, "0");
+// };
+// setInterval(updateTime, 1000);
+// updateTime();
